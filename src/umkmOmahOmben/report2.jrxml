@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d8a743ef-72a7-49f8-afb3-4ef681a510c1">
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     tbl_transaksi_detail.`jumlah_barang` AS tbl_transaksi_detail_jumlah_barang,
+     tbl_transaksi_detail.`total_harga` AS tbl_transaksi_detail_total_harga,
+     tbl_transaksi.`id_transaksi` AS tbl_transaksi_id_transaksi,
+     tbl_transaksi.`id_pegawai` AS tbl_transaksi_id_pegawai,
+     tbl_transaksi.`jumlah_barang` AS tbl_transaksi_jumlah_barang,
+     tbl_transaksi.`total_harga` AS tbl_transaksi_total_harga,
+     tbl_transaksi.`tanggal` AS tbl_transaksi_tanggal,
+     tbl_transaksi.`harga_diskon` AS tbl_transaksi_harga_diskon,
+     tbl_transaksi.`pembayaran` AS tbl_transaksi_pembayaran,
+     tbl_transaksi.`kembalian` AS tbl_transaksi_kembalian,
+     tbl_produk.`id_produk` AS tbl_produk_id_produk,
+     tbl_produk.`nama_produk` AS tbl_produk_nama_produk,
+     tbl_produk.`Harga` AS tbl_produk_Harga,
+     tbl_member.`id_member` AS tbl_member_id_member,
+     tbl_member.`nama_member` AS tbl_member_nama_member,
+     tbl_member.`no_telp` AS tbl_member_no_telp,
+     tbl_member.`alamat` AS tbl_member_alamat,
+     tbl_member.`diskon` AS tbl_member_diskon
+FROM
+     `tbl_transaksi` tbl_transaksi INNER JOIN `tbl_transaksi_detail` tbl_transaksi_detail ON tbl_transaksi.`id_transaksi` = tbl_transaksi_detail.`id_transaksi`
+     INNER JOIN `tbl_produk` tbl_produk ON tbl_transaksi_detail.`id_produk` = tbl_produk.`id_produk`
+     INNER JOIN `tbl_member` tbl_member ON tbl_transaksi.`id_member` = tbl_member.`id_member`]]>
+	</queryString>
+	<field name="tbl_transaksi_detail_jumlah_barang" class="java.lang.Integer"/>
+	<field name="tbl_transaksi_detail_total_harga" class="java.lang.Integer"/>
+	<field name="tbl_transaksi_id_transaksi" class="java.lang.String"/>
+	<field name="tbl_transaksi_id_pegawai" class="java.lang.String"/>
+	<field name="tbl_transaksi_jumlah_barang" class="java.lang.Integer"/>
+	<field name="tbl_transaksi_total_harga" class="java.lang.Integer"/>
+	<field name="tbl_transaksi_tanggal" class="java.sql.Date"/>
+	<field name="tbl_transaksi_harga_diskon" class="java.lang.Integer"/>
+	<field name="tbl_transaksi_pembayaran" class="java.lang.Integer"/>
+	<field name="tbl_transaksi_kembalian" class="java.lang.Integer"/>
+	<field name="tbl_produk_id_produk" class="java.lang.String"/>
+	<field name="tbl_produk_nama_produk" class="java.lang.String"/>
+	<field name="tbl_produk_Harga" class="java.lang.Integer"/>
+	<field name="tbl_member_id_member" class="java.lang.String"/>
+	<field name="tbl_member_nama_member" class="java.lang.String"/>
+	<field name="tbl_member_no_telp" class="java.lang.String"/>
+	<field name="tbl_member_alamat" class="java.lang.String"/>
+	<field name="tbl_member_diskon" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
