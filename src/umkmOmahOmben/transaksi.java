@@ -90,7 +90,7 @@ public class transaksi extends javax.swing.JFrame {
 //            });
 //
 //        } catch (Exception e) {
-//            e.printStackTrace();
+//            e.printStackTrace();           
 ////            Message.showException(null, e);
 //        }
 //}
@@ -353,6 +353,7 @@ public class transaksi extends javax.swing.JFrame {
         tidtransaksi.setText("");
         ttotalbarang.setText("");
         thrgbrg.setText("");
+        tdiskon.setText("0");
         kalender();
         ID_TRANSAKSI();
         harga();
@@ -499,6 +500,11 @@ public class transaksi extends javax.swing.JFrame {
         tpembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tpembayaranActionPerformed(evt);
+            }
+        });
+        tpembayaran.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tpembayaranKeyReleased(evt);
             }
         });
         getContentPane().add(tpembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 230, 190, 30));
@@ -1235,36 +1241,40 @@ public class transaksi extends javax.swing.JFrame {
     }//GEN-LAST:event_bhitungActionPerformed
 
     private void bbayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bbayarActionPerformed
-        String sql = "Insert into `tbl_transaksi` VALUES ('" + idTransaksi + "','" + login.idPegawai + "','" + tidmember.getText() + "','" + jumlahBarang() + "','" + hargaTotal() + "','"
-                + ttanggal.getText() + "','" + ttotalharga.getText() + "','" + tpembayaran.getText() + "','" + tkembalian.getText() + "')";
-        try {
-            login lg = new login();
+        int kembalian = Integer.parseInt(tkembalian.getText());
+        if (kembalian >= 0) {
+            String sql = "Insert into `tbl_transaksi` VALUES ('" + idTransaksi + "','" + login.idPegawai + "','" + tidmember.getText() + "','" + jumlahBarang() + "','" + hargaTotal() + "','"
+                    + ttanggal.getText() + "','" + ttotalharga.getText() + "','" + tpembayaran.getText() + "','" + tkembalian.getText() + "')";
+            try {
+                login lg = new login();
 
-            java.sql.Connection conn = (Connection) koneksi.getKoneksi();
-            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-            pst.execute();
-            System.out.println(sql);
-            System.out.println(idPegawai + " " + jumlahBarang() + " " + hargaTotal());
+                java.sql.Connection conn = (Connection) koneksi.getKoneksi();
+                java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+                pst.execute();
+                System.out.println(sql);
+                System.out.println(idPegawai + " " + jumlahBarang() + " " + hargaTotal());
 
-            int row = tblhasil.getRowCount();
-            for (int i = 0; i < row; i++) {
-                String sql1 = "insert into `tbl_transaksi_detail` VALUES ('" + idTransaksi + "','" + tblhasil.getValueAt(i, 0).toString() + "','"
-                        + tblhasil.getValueAt(i, 2).toString() + "','" + tblhasil.getValueAt(i, 3).toString() + "')";
-                java.sql.Connection con = (Connection) koneksi.getKoneksi();
-                java.sql.PreparedStatement ps = conn.prepareStatement(sql1);
-                ps.execute();
-                System.out.println(sql1);
+                int row = tblhasil.getRowCount();
+                for (int i = 0; i < row; i++) {
+                    String sql1 = "insert into `tbl_transaksi_detail` VALUES ('" + idTransaksi + "','" + tblhasil.getValueAt(i, 0).toString() + "','"
+                            + tblhasil.getValueAt(i, 2).toString() + "','" + tblhasil.getValueAt(i, 3).toString() + "')";
+                    java.sql.Connection con = (Connection) koneksi.getKoneksi();
+                    java.sql.PreparedStatement ps = conn.prepareStatement(sql1);
+                    ps.execute();
+                    System.out.println(sql1);
 
+                }
+                JOptionPane.showMessageDialog(null, "Penympanan berhasil!");
+                cetak(tidtransaksi.getText());
+                clear();
+                hapusTabel();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage() + " insert pegawai");
             }
-            JOptionPane.showMessageDialog(null, "Penympanan berhasil!");
-            cetak(tidtransaksi.getText());
-            clear();
-            hapusTabel();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage() + " insert pegawai");
+            System.out.println(sql);
+        } else {
+            JOptionPane.showMessageDialog(this, "MAAF UANG KURANG!!!");
         }
-        System.out.println(sql);
-
     }//GEN-LAST:event_bbayarActionPerformed
 
     private void ttotalhargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ttotalhargaActionPerformed
@@ -1401,6 +1411,13 @@ public class transaksi extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_ttotalbarangKeyReleased
+
+    private void tpembayaranKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tpembayaranKeyReleased
+       
+            int jumlah = Integer.valueOf(tpembayaran.getText()) - Integer.valueOf(ttotalharga.getText());
+            tkembalian.setText(String.valueOf(jumlah));
+        
+    }//GEN-LAST:event_tpembayaranKeyReleased
 
     /**
      * @param args the command line arguments
