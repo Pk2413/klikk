@@ -1268,6 +1268,7 @@ public class transaksi extends javax.swing.JFrame {
                 cetak(tidtransaksi.getText());
                 clear();
                 hapusTabel();
+                
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getMessage() + " insert pegawai");
             }

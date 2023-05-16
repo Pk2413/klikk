@@ -63,8 +63,8 @@ public class login extends javax.swing.JFrame {
 
         pw = new javax.swing.JFrame();
         jLabel3 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
         tpass = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
         bregister = new javax.swing.JButton();
         tusername = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -74,27 +74,29 @@ public class login extends javax.swing.JFrame {
 
         pw.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         pw.setLocation(new java.awt.Point(400, 300));
+        pw.setPreferredSize(new java.awt.Dimension(388, 190));
         pw.setResizable(false);
-        pw.setSize(new java.awt.Dimension(499, 193));
+        pw.setSize(new java.awt.Dimension(388, 190));
         pw.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setText("MASUKAN PASSWORD ADMIN");
-        pw.getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
-
-        jButton3.setText("MASUK");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        pw.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 80, 30));
+        pw.getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
 
         tpass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tpassActionPerformed(evt);
             }
         });
-        pw.getContentPane().add(tpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 240, 50));
+        pw.getContentPane().add(tpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 240, 50));
+
+        jButton3.setText("MASUK");
+        jButton3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        pw.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 80, 30));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LOGIN");

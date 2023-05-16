@@ -24,13 +24,7 @@ import static umkmOmahOmben.transaksi.ttanggal;
  */
 public class member extends javax.swing.JFrame {
 
-    private void kalender() {
-        Date ys = new Date();
-        SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
-
-        ttanggal.setText(fm.format(ys));
-
-    }
+    
 
     void clear() {
         tidmember.setText("");
@@ -38,7 +32,7 @@ public class member extends javax.swing.JFrame {
         talamat.setText("");
         tnotelp.setText("");
         tdiskon.setText("");
-        kalender();
+        
     }
 
     private void tblmember() {
@@ -70,7 +64,7 @@ public class member extends javax.swing.JFrame {
     public member() {
         initComponents();
         tblmember();
-        kalender();
+        
     }
 
     /**
