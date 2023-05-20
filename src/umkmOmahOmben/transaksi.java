@@ -175,6 +175,22 @@ public class transaksi extends javax.swing.JFrame {
 //            hargaTotal += b;
 //        }
 //    }
+    private void hitungDiskon() {
+        double diskon = Integer.valueOf(tdiskon.getText());
+        double harga = Integer.valueOf(total.getText());
+        System.out.println(diskon);
+        System.out.println(harga);
+
+        double dis = diskon / 100;
+        System.out.println(dis);
+        int total = (int) Math.round(harga * dis);
+        System.out.println(total);
+        int total1 = (int) Math.round(harga - total);
+        ttotalharga.setText(String.valueOf(total1));
+
+        System.out.println(login.idPegawai + " " + jumlahBarang() + " " + hargaTotal());
+    }
+
     private void harga() {
         DefaultTableModel model = (DefaultTableModel) tblhasil.getModel();
         int row = model.getRowCount();
@@ -183,13 +199,17 @@ public class transaksi extends javax.swing.JFrame {
             String a = model.getValueAt(i, 3).toString();
             if (a.equals("")) {
                 total.setText("0");
+                ttotalharga.setText("0");
             } else {
                 int b = Integer.valueOf(a);
                 jumlah += b;
+
             }
         }
 
         total.setText(String.valueOf(jumlah));
+        hitungDiskon();
+
     }
 
     private void hapusTabel() {
@@ -383,7 +403,6 @@ public class transaksi extends javax.swing.JFrame {
         bloghapus = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         ttotalharga = new javax.swing.JTextField();
-        bhitung1 = new javax.swing.JButton();
         bbayar = new javax.swing.JButton();
         bhitung = new javax.swing.JButton();
         total = new javax.swing.JTextField();
@@ -451,14 +470,6 @@ public class transaksi extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ttotalharga, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 170, 190, 30));
-
-        bhitung1.setText("print");
-        bhitung1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bhitung1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(bhitung1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 350, 80, -1));
 
         bbayar.setContentAreaFilled(false);
         bbayar.addActionListener(new java.awt.event.ActionListener() {
@@ -1225,19 +1236,20 @@ public class transaksi extends javax.swing.JFrame {
     }//GEN-LAST:event_tblmemberMouseClicked
 
     private void bhitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bhitungActionPerformed
-        double diskon = Integer.valueOf(tdiskon.getText());
-        double harga = Integer.valueOf(total.getText());
-        System.out.println(diskon);
-        System.out.println(harga);
-
-        double dis = diskon / 100;
-        System.out.println(dis);
-        int total = (int) Math.round(harga * dis);
-        System.out.println(total);
-        int total1 = (int) Math.round(harga - total);
-        ttotalharga.setText(String.valueOf(total1));
-
-        System.out.println(login.idPegawai + " " + jumlahBarang() + " " + hargaTotal());
+//        double diskon = Integer.valueOf(tdiskon.getText());
+//        double harga = Integer.valueOf(total.getText());
+//        System.out.println(diskon);
+//        System.out.println(harga);
+//
+//        double dis = diskon / 100;
+//        System.out.println(dis);
+//        int total = (int) Math.round(harga * dis);
+//        System.out.println(total);
+//        int total1 = (int) Math.round(harga - total);
+//        ttotalharga.setText(String.valueOf(total1));
+//
+//        System.out.println(login.idPegawai + " " + jumlahBarang() + " " + hargaTotal());
+hitungDiskon();
     }//GEN-LAST:event_bhitungActionPerformed
 
     private void bbayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bbayarActionPerformed
@@ -1268,7 +1280,7 @@ public class transaksi extends javax.swing.JFrame {
                 cetak(tidtransaksi.getText());
                 clear();
                 hapusTabel();
-                
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getMessage() + " insert pegawai");
             }
@@ -1383,13 +1395,6 @@ public class transaksi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tidbarangKeyReleased
 
-    private void bhitung1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bhitung1ActionPerformed
-
-        cetak(tidtransaksi.getText());
-//        hapusTabel();
-
-    }//GEN-LAST:event_bhitung1ActionPerformed
-
     private void ttotalbarangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ttotalbarangKeyPressed
 
     }//GEN-LAST:event_ttotalbarangKeyPressed
@@ -1414,10 +1419,10 @@ public class transaksi extends javax.swing.JFrame {
     }//GEN-LAST:event_ttotalbarangKeyReleased
 
     private void tpembayaranKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tpembayaranKeyReleased
-       
-            int jumlah = Integer.valueOf(tpembayaran.getText()) - Integer.valueOf(ttotalharga.getText());
-            tkembalian.setText(String.valueOf(jumlah));
-        
+
+        int jumlah = Integer.valueOf(tpembayaran.getText()) - Integer.valueOf(ttotalharga.getText());
+        tkembalian.setText(String.valueOf(jumlah));
+
     }//GEN-LAST:event_tpembayaranKeyReleased
 
     /**
@@ -1464,7 +1469,6 @@ public class transaksi extends javax.swing.JFrame {
     private javax.swing.JButton bedit;
     private javax.swing.JButton bhapus;
     private javax.swing.JButton bhitung;
-    private javax.swing.JButton bhitung1;
     private javax.swing.JButton blaporan;
     private javax.swing.JButton bloghapus;
     private javax.swing.JButton bmember;

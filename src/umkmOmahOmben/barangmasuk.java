@@ -388,6 +388,14 @@ public class barangmasuk extends javax.swing.JFrame {
                 tjumlahbarangActionPerformed(evt);
             }
         });
+        tjumlahbarang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tjumlahbarangKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tjumlahbarangKeyReleased(evt);
+            }
+        });
         getContentPane().add(tjumlahbarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 270, 180, 30));
 
         tidsuplier.setBackground(new java.awt.Color(217, 217, 217));
@@ -1058,6 +1066,19 @@ public class barangmasuk extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_tidbarangKeyReleased
+
+    private void tjumlahbarangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tjumlahbarangKeyReleased
+        // TODO add your handling code here:
+      int harga = Integer.parseInt(tharga.getText());
+        int total = Integer.parseInt(tjumlahbarang.getText());
+
+        this.ttotalharga.setText(String.valueOf(harga * total));
+    }//GEN-LAST:event_tjumlahbarangKeyReleased
+
+    private void tjumlahbarangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tjumlahbarangKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tjumlahbarangKeyPressed
 
     /**
      * @param args the command line arguments

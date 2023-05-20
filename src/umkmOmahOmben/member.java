@@ -164,7 +164,7 @@ public class member extends javax.swing.JFrame {
                 beditActionPerformed(evt);
             }
         });
-        getContentPane().add(bedit, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 620, 140, 70));
+        getContentPane().add(bedit, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 550, 140, 70));
 
         btambah.setContentAreaFilled(false);
         btambah.addActionListener(new java.awt.event.ActionListener() {
@@ -172,7 +172,7 @@ public class member extends javax.swing.JFrame {
                 btambahActionPerformed(evt);
             }
         });
-        getContentPane().add(btambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 620, 140, 70));
+        getContentPane().add(btambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 550, 140, 70));
 
         bhapus.setContentAreaFilled(false);
         bhapus.addActionListener(new java.awt.event.ActionListener() {
@@ -180,7 +180,7 @@ public class member extends javax.swing.JFrame {
                 bhapusActionPerformed(evt);
             }
         });
-        getContentPane().add(bhapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 620, 140, 70));
+        getContentPane().add(bhapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 550, 140, 70));
 
         bdashboard.setContentAreaFilled(false);
         bdashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
