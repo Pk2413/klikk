@@ -79,7 +79,7 @@ public class login extends javax.swing.JFrame {
         pw.setSize(new java.awt.Dimension(388, 190));
         pw.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setText("MASUKAN PASSWORD ADMIN");
+        jLabel3.setText("MASUKAN PASSWORD OWNER");
         pw.getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
 
         tpass.addActionListener(new java.awt.event.ActionListener() {
@@ -206,8 +206,7 @@ public class login extends javax.swing.JFrame {
             rs.close();
             stm.close();
         } catch (SQLException | ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-
+            e.printStackTrace();
         }
         if (cekuser == null && cekpw == null) {
 

@@ -151,6 +151,11 @@ private void ID_SUPLIER() {
                 tnohpActionPerformed(evt);
             }
         });
+        tnohp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tnohpKeyTyped(evt);
+            }
+        });
         getContentPane().add(tnohp, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 480, 490, 30));
 
         tidsuplier.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -516,6 +521,12 @@ private void ID_SUPLIER() {
             break;
         }
     }//GEN-LAST:event_logoutActionPerformed
+
+    private void tnohpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tnohpKeyTyped
+ if(Character.isAlphabetic(evt.getKeyChar())){
+evt.consume();
+ }
+    }//GEN-LAST:event_tnohpKeyTyped
 
     /**
      * @param args the command line arguments

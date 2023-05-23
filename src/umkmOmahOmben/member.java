@@ -130,6 +130,11 @@ public class member extends javax.swing.JFrame {
 
         tdiskon.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         tdiskon.setBorder(null);
+        tdiskon.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tdiskonKeyTyped(evt);
+            }
+        });
         getContentPane().add(tdiskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 490, 480, 30));
 
         tidmember.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -156,6 +161,11 @@ public class member extends javax.swing.JFrame {
 
         tnotelp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         tnotelp.setBorder(null);
+        tnotelp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tnotelpKeyTyped(evt);
+            }
+        });
         getContentPane().add(tnotelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 405, 480, 30));
 
         bedit.setContentAreaFilled(false);
@@ -280,11 +290,11 @@ public class member extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "ISI SEMUA DATA TERLEBIH DAHULU");
         } else {
 
-            try {
+//            try {
 //                int nomer = Integer.parseInt(tnotelp.getText());
-                if (tnotelp.getText().length() > 13 || tnotelp.getText().length() <= 8) {
-                    JOptionPane.showMessageDialog(null, "Masukuan Nomer Telepon Dengan Benar", "ERROR", JOptionPane.ERROR_MESSAGE);
-                } else {
+//                if (tnotelp.getText().length() > 13 || tnotelp.getText().length() <= 8) {
+//                    JOptionPane.showMessageDialog(null, "Masukuan Nomer Telepon Dengan Benar", "ERROR", JOptionPane.ERROR_MESSAGE);
+//                } else {
                     try {
 //                int nomer = Integer.parseInt(tnohp.getText());
                         String sql = "INSERT INTO tbl_member VALUES ('" + tidmember.getText() + "','"
@@ -303,10 +313,10 @@ public class member extends javax.swing.JFrame {
                 tblmember();
                 clear();
 
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Masukuan Nomer Telepon Dengan Benar", "ERROR", JOptionPane.ERROR_MESSAGE);
-            }
-        }
+//            } catch (Exception e) {
+//                JOptionPane.showMessageDialog(null, "Masukuan Nomer Telepon Dengan Benar", "ERROR", JOptionPane.ERROR_MESSAGE);
+//            }
+//        }
     }//GEN-LAST:event_btambahActionPerformed
 
     private void bhapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bhapusActionPerformed
@@ -457,6 +467,18 @@ public class member extends javax.swing.JFrame {
             break;
         }
     }//GEN-LAST:event_logoutActionPerformed
+
+    private void tnotelpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tnotelpKeyTyped
+if(Character.isAlphabetic(evt.getKeyChar())){
+    evt.consume();
+}
+    }//GEN-LAST:event_tnotelpKeyTyped
+
+    private void tdiskonKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tdiskonKeyTyped
+ if(Character.isAlphabetic(evt.getKeyChar())){
+evt.consume();
+ }        // TODO add your handling code here:
+    }//GEN-LAST:event_tdiskonKeyTyped
 
     /**
      * @param args the command line arguments

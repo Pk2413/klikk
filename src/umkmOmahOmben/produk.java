@@ -218,6 +218,11 @@ public class produk extends javax.swing.JFrame {
         tharga.setToolTipText("");
         tharga.setAlignmentX(2.0F);
         tharga.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tharga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                thargaKeyTyped(evt);
+            }
+        });
         getContentPane().add(tharga, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 510, 50));
 
         tidproduk.setBackground(new java.awt.Color(217, 217, 217));
@@ -558,6 +563,12 @@ public class produk extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "gagal menyimpan");
         }
     }//GEN-LAST:event_barcodeMouseClicked
+
+    private void thargaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_thargaKeyTyped
+ if(Character.isAlphabetic(evt.getKeyChar())){
+evt.consume();
+ }        // TODO add your handling code here:
+    }//GEN-LAST:event_thargaKeyTyped
 
     /**
      * @param args the command line arguments

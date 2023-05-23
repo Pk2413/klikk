@@ -377,6 +377,11 @@ public class barangmasuk extends javax.swing.JFrame {
                 ttotalhargaActionPerformed(evt);
             }
         });
+        ttotalharga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ttotalhargaKeyTyped(evt);
+            }
+        });
         getContentPane().add(ttotalharga, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 320, 180, 30));
 
         tjumlahbarang.setBackground(new java.awt.Color(217, 217, 217));
@@ -394,6 +399,9 @@ public class barangmasuk extends javax.swing.JFrame {
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tjumlahbarangKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tjumlahbarangKeyTyped(evt);
             }
         });
         getContentPane().add(tjumlahbarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 270, 180, 30));
@@ -501,6 +509,11 @@ public class barangmasuk extends javax.swing.JFrame {
 
         tharga.setBackground(new java.awt.Color(217, 217, 217));
         tharga.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tharga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                thargaKeyTyped(evt);
+            }
+        });
         getContentPane().add(tharga, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 220, 180, 30));
 
         jButton1.setText("?");
@@ -1079,6 +1092,24 @@ public class barangmasuk extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_tjumlahbarangKeyPressed
+
+    private void thargaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_thargaKeyTyped
+ if(Character.isAlphabetic(evt.getKeyChar())){
+evt.consume();
+ }        // TODO add your handling code here:
+    }//GEN-LAST:event_thargaKeyTyped
+
+    private void tjumlahbarangKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tjumlahbarangKeyTyped
+ if(Character.isAlphabetic(evt.getKeyChar())){
+evt.consume();
+ }        // TODO add your handling code here:
+    }//GEN-LAST:event_tjumlahbarangKeyTyped
+
+    private void ttotalhargaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ttotalhargaKeyTyped
+ if(Character.isAlphabetic(evt.getKeyChar())){
+evt.consume();
+ }        // TODO add your handling code here:
+    }//GEN-LAST:event_ttotalhargaKeyTyped
 
     /**
      * @param args the command line arguments

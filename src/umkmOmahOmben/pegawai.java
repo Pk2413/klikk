@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.ArrayList;
+import java.awt.event.KeyEvent;
 
 public class pegawai extends javax.swing.JFrame {
 
@@ -138,6 +139,11 @@ public class pegawai extends javax.swing.JFrame {
 
         tnohp.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         tnohp.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tnohp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tnohpKeyTyped(evt);
+            }
+        });
         getContentPane().add(tnohp, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 480, 510, 40));
 
         tidpegawai.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -318,31 +324,33 @@ public class pegawai extends javax.swing.JFrame {
         if (tidpegawai.getText().equals("") || tnama.getText().equals("") || tnohp.getText().equals("") || talamat.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "ISI SEMUA DATA TERLEBIH DAHULU");
         } else {
-           
-            try { int nomer = Integer.parseInt(tnohp.getText());
-                if (tnohp.getText().length() > 13 || tnohp.getText().length() <= 8) {
-                    JOptionPane.showMessageDialog(null, "Masukuan Nomer Telepon Dengan Benar", "ERROR", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    try {
+
+//            try { int nomer = Integer.parseInt(tnohp.getText());
+//                if (tnohp.getText().length() > 13 || tnohp.getText().length() <= 8) {
+//                    JOptionPane.showMessageDialog(null, "Masukuan Nomer Telepon Dengan Benar", "ERROR", JOptionPane.ERROR_MESSAGE);
+//                } else {
+            
+            
+                try {
 //                int nomer = Integer.parseInt(tnohp.getText());
-                        String sql = "INSERT INTO tbl_pegawai VALUES ('" + tidpegawai.getText() + "','"
-                                + tnama.getText() + "','" + tnohp.getText() + "','" + talamat.getText() + "')";
+                    String sql = "INSERT INTO tbl_pegawai VALUES ('" + tidpegawai.getText() + "','"
+                            + tnama.getText() + "','" + tnohp.getText() + "','" + talamat.getText() + "')";
 
-                        java.sql.Connection conn = (Connection) koneksi.getKoneksi();
-                        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-                        pst.execute();
-                        JOptionPane.showMessageDialog(null, "penyimpanan Berhasil");
-                        clear();
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(this, "Periksa ID Pegawai dan Nomer Telepon!", "ERROR", JOptionPane.ERROR_MESSAGE);
-                    }
+                    java.sql.Connection conn = (Connection) koneksi.getKoneksi();
+                    java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+                    pst.execute();
+                    JOptionPane.showMessageDialog(null, "penyimpanan Berhasil");
+                    clear();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Periksa ID Pegawai dan Nomer Telepon!", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
-                load_table();
-                ID_PEGAWAI();
-
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Masukuan Nomer Telepon Dengan Benar", "ERROR", JOptionPane.ERROR_MESSAGE);
-            }
+//                }
+            load_table();
+            ID_PEGAWAI();
+            
+//            } catch (Exception e) {
+//                JOptionPane.showMessageDialog(null, "Masukuan Nomer Telepon Dengan Benar", "ERROR", JOptionPane.ERROR_MESSAGE);
+//            }
         }
     }//GEN-LAST:event_btambahActionPerformed
 
@@ -512,11 +520,17 @@ public class pegawai extends javax.swing.JFrame {
 
         switch (jawab) {
             case JOptionPane.YES_OPTION:
-            dispose();
-            new login().setVisible(true);
-            break;
+                dispose();
+                new login().setVisible(true);
+                break;
         }
     }//GEN-LAST:event_logoutActionPerformed
+
+    private void tnohpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tnohpKeyTyped
+        if(Character.isAlphabetic(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_tnohpKeyTyped
 
     /**
      * @param args the command line arguments

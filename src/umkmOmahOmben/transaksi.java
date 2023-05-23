@@ -469,6 +469,11 @@ public class transaksi extends javax.swing.JFrame {
                 ttotalhargaActionPerformed(evt);
             }
         });
+        ttotalharga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ttotalhargaKeyTyped(evt);
+            }
+        });
         getContentPane().add(ttotalharga, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 170, 190, 30));
 
         bbayar.setContentAreaFilled(false);
@@ -504,6 +509,11 @@ public class transaksi extends javax.swing.JFrame {
                 tkembalianActionPerformed(evt);
             }
         });
+        tkembalian.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tkembalianKeyTyped(evt);
+            }
+        });
         getContentPane().add(tkembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 290, 190, 30));
 
         tpembayaran.setBackground(new java.awt.Color(217, 217, 217));
@@ -517,6 +527,9 @@ public class transaksi extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tpembayaranKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tpembayaranKeyTyped(evt);
+            }
         });
         getContentPane().add(tpembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 230, 190, 30));
 
@@ -528,10 +541,10 @@ public class transaksi extends javax.swing.JFrame {
             }
         });
         tidmember.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tidmemberInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tidmember.addActionListener(new java.awt.event.ActionListener() {
@@ -569,6 +582,11 @@ public class transaksi extends javax.swing.JFrame {
         thrgbrg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 thrgbrgActionPerformed(evt);
+            }
+        });
+        thrgbrg.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                thrgbrgKeyTyped(evt);
             }
         });
         getContentPane().add(thrgbrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 190, 30));
@@ -609,6 +627,9 @@ public class transaksi extends javax.swing.JFrame {
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 ttotalbarangKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ttotalbarangKeyTyped(evt);
             }
         });
         getContentPane().add(ttotalbarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 190, 30));
@@ -1198,6 +1219,7 @@ public class transaksi extends javax.swing.JFrame {
             if (rs.next()) {
                 tnamamember.setText(rs.getString("nama_member"));
                 tdiskon.setText(rs.getString("diskon"));
+                hitungDiskon();
             }
 
         } catch (Exception e) {
@@ -1219,7 +1241,9 @@ public class transaksi extends javax.swing.JFrame {
     }//GEN-LAST:event_totalActionPerformed
 
     private void tdiskonKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tdiskonKeyTyped
-
+ if(Character.isAlphabetic(evt.getKeyChar())){
+evt.consume();
+ }
     }//GEN-LAST:event_tdiskonKeyTyped
 
     private void tblmemberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblmemberMouseClicked
@@ -1424,6 +1448,36 @@ hitungDiskon();
         tkembalian.setText(String.valueOf(jumlah));
 
     }//GEN-LAST:event_tpembayaranKeyReleased
+
+    private void ttotalbarangKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ttotalbarangKeyTyped
+ if(Character.isAlphabetic(evt.getKeyChar())){
+evt.consume();
+ }        // TODO add your handling code here:
+    }//GEN-LAST:event_ttotalbarangKeyTyped
+
+    private void thrgbrgKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_thrgbrgKeyTyped
+ if(Character.isAlphabetic(evt.getKeyChar())){
+evt.consume();
+ }        // TODO add your handling code here:
+    }//GEN-LAST:event_thrgbrgKeyTyped
+
+    private void tpembayaranKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tpembayaranKeyTyped
+ if(Character.isAlphabetic(evt.getKeyChar())){
+evt.consume();
+ }        // TODO add your handling code here:
+    }//GEN-LAST:event_tpembayaranKeyTyped
+
+    private void tkembalianKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tkembalianKeyTyped
+ if(Character.isAlphabetic(evt.getKeyChar())){
+evt.consume();
+ }        // TODO add your handling code here:
+    }//GEN-LAST:event_tkembalianKeyTyped
+
+    private void ttotalhargaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ttotalhargaKeyTyped
+ if(Character.isAlphabetic(evt.getKeyChar())){
+evt.consume();
+ }        // TODO add your handling code here:
+    }//GEN-LAST:event_ttotalhargaKeyTyped
 
     /**
      * @param args the command line arguments
