@@ -372,8 +372,14 @@ public class transaksi extends javax.swing.JFrame {
     private void clear() {
         tidtransaksi.setText("");
         ttotalbarang.setText("");
-        thrgbrg.setText("");
+        thargabarang.setText("");
         tdiskon.setText("0");
+        tidmember.setText("");
+        tnamamember.setText("");
+//        total.setText("");
+        ttotalharga.setText("");
+        tkembalian.setText("");
+        tpembayaran.setText("");
         kalender();
         ID_TRANSAKSI();
         harga();
@@ -411,7 +417,7 @@ public class transaksi extends javax.swing.JFrame {
         tidmember = new javax.swing.JTextField();
         tnamamember = new javax.swing.JTextField();
         tdiskon = new javax.swing.JTextField();
-        thrgbrg = new javax.swing.JTextField();
+        thargabarang = new javax.swing.JTextField();
         tidtransaksi = new javax.swing.JTextField();
         tidbarang = new javax.swing.JTextField();
         ttotalbarang = new javax.swing.JTextField();
@@ -541,10 +547,10 @@ public class transaksi extends javax.swing.JFrame {
             }
         });
         tidmember.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tidmemberInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tidmember.addActionListener(new java.awt.event.ActionListener() {
@@ -577,19 +583,19 @@ public class transaksi extends javax.swing.JFrame {
         });
         getContentPane().add(tdiskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 190, 30));
 
-        thrgbrg.setBackground(new java.awt.Color(217, 217, 217));
-        thrgbrg.setBorder(null);
-        thrgbrg.addActionListener(new java.awt.event.ActionListener() {
+        thargabarang.setBackground(new java.awt.Color(217, 217, 217));
+        thargabarang.setBorder(null);
+        thargabarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                thrgbrgActionPerformed(evt);
+                thargabarangActionPerformed(evt);
             }
         });
-        thrgbrg.addKeyListener(new java.awt.event.KeyAdapter() {
+        thargabarang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                thrgbrgKeyTyped(evt);
+                thargabarangKeyTyped(evt);
             }
         });
-        getContentPane().add(thrgbrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 190, 30));
+        getContentPane().add(thargabarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 190, 30));
 
         tidtransaksi.setBackground(new java.awt.Color(217, 217, 217));
         tidtransaksi.setBorder(null);
@@ -940,7 +946,7 @@ public class transaksi extends javax.swing.JFrame {
 //        int baris = tblhasil.getRowCount();
         model.addRow(new Object[]{tidbarang.getText(),
             tnamabarang1.getText(), ttotalbarang.getText(),
-            thrgbrg.getText(), ttanggal.getText()});
+            thargabarang.getText(), ttanggal.getText()});
 
         clear();
 
@@ -991,6 +997,8 @@ public class transaksi extends javax.swing.JFrame {
             if (res.next()) {
                 this.tidbarang.setText(res.getString("id_produk"));
                 this.tnamabarang1.setText(res.getString("nama_produk"));
+                ttotalbarang.setText("1");
+                thargabarang.setText(String.valueOf(res.getInt("harga")));
 
             }
 
@@ -999,10 +1007,10 @@ public class transaksi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblprodukMouseClicked
 
-    private void thrgbrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thrgbrgActionPerformed
+    private void thargabarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thargabarangActionPerformed
 
 
-    }//GEN-LAST:event_thrgbrgActionPerformed
+    }//GEN-LAST:event_thargabarangActionPerformed
 
     private void tblhasilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblhasilMouseClicked
 //        try {
@@ -1014,7 +1022,7 @@ public class transaksi extends javax.swing.JFrame {
         tidbarang.setText(idBarang);
         tnamabarang1.setText(nama);
         ttotalbarang.setText(jumlah);
-        thrgbrg.setText(total);
+        thargabarang.setText(total);
         ttanggal.setText(tanggal);
 
 //            String sql = "SELECT *, tbl_pegawai.nama_pegawai, tbl_produk.nama_produk "
@@ -1062,7 +1070,7 @@ public class transaksi extends javax.swing.JFrame {
 
                 int jumlah = Integer.parseInt(ttotalbarang.getText());
                 int harga = Integer.parseInt(rs.getString("harga"));
-                this.thrgbrg.setText(String.valueOf(harga * jumlah));
+                this.thargabarang.setText(String.valueOf(harga * jumlah));
 
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -1122,7 +1130,7 @@ public class transaksi extends javax.swing.JFrame {
         model.removeRow(tblhasil.getSelectedRow());
         model.addRow(new Object[]{tidbarang.getText(),
             tnamabarang1.getText(), ttotalbarang.getText(),
-            thrgbrg.getText(), ttanggal.getText()});
+            thargabarang.getText(), ttanggal.getText()});
 
         clear();
 
@@ -1257,6 +1265,7 @@ evt.consume();
 
         String nohp = tblmember.getValueAt(baris, 2).toString();
         tdiskon.setText(nohp);
+        hitungDiskon();
     }//GEN-LAST:event_tblmemberMouseClicked
 
     private void bhitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bhitungActionPerformed
@@ -1412,7 +1421,7 @@ hitungDiskon();
                 ttotalbarang.setText("1");
                 int jumlah = Integer.parseInt(ttotalbarang.getText());
                 int harga = Integer.parseInt(rs.getString("harga"));
-                this.thrgbrg.setText(String.valueOf(harga * jumlah));
+                this.thargabarang.setText(String.valueOf(harga * jumlah));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "error pada id Barang!");
@@ -1433,7 +1442,7 @@ hitungDiskon();
 
                 int jumlah = Integer.parseInt(ttotalbarang.getText());
                 int harga = Integer.parseInt(rs.getString("harga"));
-                this.thrgbrg.setText(String.valueOf(harga * jumlah));
+                this.thargabarang.setText(String.valueOf(harga * jumlah));
 
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -1455,11 +1464,11 @@ evt.consume();
  }        // TODO add your handling code here:
     }//GEN-LAST:event_ttotalbarangKeyTyped
 
-    private void thrgbrgKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_thrgbrgKeyTyped
+    private void thargabarangKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_thargabarangKeyTyped
  if(Character.isAlphabetic(evt.getKeyChar())){
 evt.consume();
  }        // TODO add your handling code here:
-    }//GEN-LAST:event_thrgbrgKeyTyped
+    }//GEN-LAST:event_thargabarangKeyTyped
 
     private void tpembayaranKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tpembayaranKeyTyped
  if(Character.isAlphabetic(evt.getKeyChar())){
@@ -1543,7 +1552,7 @@ evt.consume();
     private javax.swing.JTable tblmember;
     private javax.swing.JTable tblproduk;
     public static javax.swing.JTextField tdiskon;
-    public static javax.swing.JTextField thrgbrg;
+    public static javax.swing.JTextField thargabarang;
     public static javax.swing.JTextField tidbarang;
     public static javax.swing.JTextField tidmember;
     private javax.swing.JTextField tidtransaksi;
