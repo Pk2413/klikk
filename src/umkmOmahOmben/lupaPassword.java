@@ -5,6 +5,11 @@
  */
 package umkmOmahOmben;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import jdk.nashorn.internal.scripts.JO;
 
@@ -105,6 +110,9 @@ public class lupaPassword extends javax.swing.JFrame {
     }//GEN-LAST:event_tnotlpActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      if(tusername.getText().equals("") || tpassword.getText().equals("") || tnotlp.getText().equals("") || tpassword.getText().length() < 4){
+          JOptionPane.showMessageDialog(null, "LENGKAPI DATA TERLEBIH DAHULU");
+      }else{
         try {
             String sql = "UPDATE `tbl_akun` "
                     + "JOIN tbl_pegawai "
@@ -112,10 +120,17 @@ public class lupaPassword extends javax.swing.JFrame {
                     + "SET tbl_akun.password='"+tpassword.getText()
                     +"' WHERE tbl_akun.username ='"+tusername.getText()
                     +"' and tbl_pegawai.no_telp = '"+tnotlp.getText()+"';";
+            Connection con = (Connection) koneksi.getKoneksi();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.execute();
+            System.out.println(sql);
             JOptionPane.showMessageDialog(this, "Password Telah Diubah");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(lupaPassword.class.getName()).log(Level.SEVERE, null, ex);
         }
+      }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void bkembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bkembaliActionPerformed

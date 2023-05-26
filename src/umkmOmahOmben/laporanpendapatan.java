@@ -342,13 +342,13 @@ public class laporanpendapatan extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton3.setText("PRINT");
+        jButton3.setText("EXPORT");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 170, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 170, -1, -1));
 
         tglakhir.setDateFormatString("MMM d,y");
         tglakhir.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N

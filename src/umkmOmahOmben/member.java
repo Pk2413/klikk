@@ -139,9 +139,19 @@ public class member extends javax.swing.JFrame {
 
         tidmember.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         tidmember.setBorder(null);
+        tidmember.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tidmemberMouseClicked(evt);
+            }
+        });
         tidmember.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tidmemberActionPerformed(evt);
+            }
+        });
+        tidmember.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tidmemberKeyPressed(evt);
             }
         });
         getContentPane().add(tidmember, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 172, 480, 30));
@@ -479,6 +489,14 @@ if(Character.isAlphabetic(evt.getKeyChar())){
 evt.consume();
  }        // TODO add your handling code here:
     }//GEN-LAST:event_tdiskonKeyTyped
+
+    private void tidmemberKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tidmemberKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tidmemberKeyPressed
+
+    private void tidmemberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tidmemberMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tidmemberMouseClicked
 
     /**
      * @param args the command line arguments

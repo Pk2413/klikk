@@ -13,6 +13,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,60 +28,50 @@ public class registrasi extends javax.swing.JFrame {
 
     private void clear() {
 
-        tusername.setText("");
+        tnama.setText("");
         tpassword.setText("");
+        tnotlp.setText("");
+        tusername.setText("");
+        talamat.setText("");
 //        ID_PEGAWAI();
     }
 
-    private void pilihanPegawai() {
+    private void ID_PEGAWAI() {
+//        List logBarang = new ArrayList();
+        String sql = "SELECT max(right(id_pegawai,4)) as id FROM tbl_pegawai ";
+        //mengambil nilai id pegawai dari kanan 4 huruf/angka
         try {
-            String sql = "select * from tbl_pegawai where 1";
-            Connection con = (Connection) koneksi.getKoneksi();
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(sql);
 
+            Connection conn = (Connection) koneksi.getKoneksi();
+            java.sql.Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            java.sql.ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
-                pilgay.addItem(rs.getString("id_pegawai") + " || " + rs.getString("nama_pegawai"));
+                if (rs.first() == false) {
+                    idpegawai = "PG0001";
+                } else {
+                    rs.last();
+                    int autoid = rs.getInt("id");
+                    String nomor = String.valueOf(autoid + 1);
+                    int no = nomor.length();
+
+                    for (int i = 0; i < 4 - no; i++) {
+                        nomor = "0" + nomor;
+                    }
+                    idpegawai = ("PG" + nomor);
+                    System.out.println(idpegawai);
+                }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e);
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
-//    private void ID_PEGAWAI() {
-//
-//        String sql = "SELECT max(right(id_pegawai,4)) as id FROM tbl_pegawai ";
-//        //mengambil nilai id pegawai dari kanan 4 huruf/angka
-//        try {
-//
-//            Connection conn = (Connection) koneksi.getKoneksi();
-//            java.sql.Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-//            java.sql.ResultSet rs = stm.executeQuery(sql);
-//            while (rs.next()) {
-//
-//                rs.last();
-//                int autoid = rs.getInt("id");
-//                String nomor = String.valueOf(autoid + 1);
-//                int no = nomor.length();
-//
-//                for (int i = 0; i < 4 - no; i++) {
-//                    nomor = "0" + nomor;
-//                }
-//                idpegawai = ("PG" + nomor);
-//                System.out.println(idpegawai);
-//
-//            }
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, e.getMessage());
-//        }
-//
-//    }
     /**
      * Creates new form registrasi
      */
     public registrasi() {
         initComponents();
-        pilihanPegawai();
+        ID_PEGAWAI();
 //        ID_PEGAWAI();
     }
 
@@ -93,9 +86,11 @@ public class registrasi extends javax.swing.JFrame {
 
         tpassword = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        tusername = new javax.swing.JTextField();
-        pilgay = new javax.swing.JComboBox<>();
+        tnama = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        tusername = new javax.swing.JTextField();
+        tnotlp = new javax.swing.JTextField();
+        talamat = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -104,7 +99,7 @@ public class registrasi extends javax.swing.JFrame {
 
         tpassword.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         tpassword.setBorder(null);
-        getContentPane().add(tpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 440, 340, 40));
+        getContentPane().add(tpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 470, 340, 40));
 
         jButton1.setToolTipText("");
         jButton1.setContentAreaFilled(false);
@@ -113,13 +108,11 @@ public class registrasi extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 570, 180, 50));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 590, 180, 50));
 
-        tusername.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        tusername.setBorder(null);
-        getContentPane().add(tusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 360, 340, 40));
-
-        getContentPane().add(pilgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 270, 340, 40));
+        tnama.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tnama.setBorder(null);
+        getContentPane().add(tnama, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 170, 340, 40));
 
         jButton2.setContentAreaFilled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -129,35 +122,72 @@ public class registrasi extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 80, 60));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/design5/register.png"))); // NOI18N
+        tusername.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tusername.setBorder(null);
+        getContentPane().add(tusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 390, 340, 40));
+
+        tnotlp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tnotlp.setBorder(null);
+        tnotlp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tnotlpKeyTyped(evt);
+            }
+        });
+        getContentPane().add(tnotlp, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 320, 340, 40));
+
+        talamat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        talamat.setBorder(null);
+        getContentPane().add(talamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 240, 340, 40));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/design5/register pegawai.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            String id = pilgay.getSelectedItem().toString().substring(0,6);
-            System.out.println(id);
-            String lvl = String.valueOf(level);
-            String sql = "insert into `tbl_akun` VALUES ('" + id + "','" + tusername.getText() + "','" + tpassword.getText() + "','" + lvl + "')";
-            java.sql.Connection con = (Connection) koneksi.getKoneksi();
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.execute();
-            
-            JOptionPane.showMessageDialog(null, "Penympanan berhasil!");
+        if (tnama.getText().equals("") || talamat.getText().equals("") || tnotlp.getText().equals("") || tusername.getText().equals("")
+                || tpassword.getText().equals("") || tpassword.getText().length() < 6) {
+            JOptionPane.showMessageDialog(this, "LENGKAPI DATA TERLEBIH DAHULU");
+        } else {
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage() + " insert pegawai");
+            try {
+
+                String lvl = String.valueOf(level);
+                String sql = "INSERT INTO tbl_pegawai VALUES ('" + idpegawai + "','"
+                        + tnama.getText() + "','" + tnotlp.getText() + "','" + talamat.getText() + "')";
+                String sql1 = "insert into `tbl_akun` VALUES ('" + idpegawai + "','" + tnama.getText() + "','" + tpassword.getText() + "','" + lvl + "')";
+
+                java.sql.Connection con = (Connection) koneksi.getKoneksi();
+                PreparedStatement pst = con.prepareStatement(sql);
+                pst.execute();
+
+                PreparedStatement ps = con.prepareStatement(sql1);
+                ps.execute();
+
+                JOptionPane.showMessageDialog(null, "Penympanan berhasil!");
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(registrasi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            clear();
         }
-
-        clear();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         new login().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tnotlpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tnotlpKeyTyped
+if(Character.isAlphabetic(evt.getKeyChar())){
+    evt.consume();
+}
+    // TODO add your handling code here:
+    }//GEN-LAST:event_tnotlpKeyTyped
 
     /**
      * @param args the command line arguments
@@ -198,7 +228,9 @@ public class registrasi extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JComboBox<String> pilgay;
+    private javax.swing.JTextField talamat;
+    private javax.swing.JTextField tnama;
+    private javax.swing.JTextField tnotlp;
     private javax.swing.JTextField tpassword;
     private javax.swing.JTextField tusername;
     // End of variables declaration//GEN-END:variables

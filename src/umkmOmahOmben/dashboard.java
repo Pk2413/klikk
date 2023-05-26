@@ -70,30 +70,37 @@ public class dashboard extends javax.swing.JFrame {
     }
 
     private int getData(String date) throws Exception {
-        String sql1 = "SELECT  total_harga as pembelian "
+        String sql1 = "SELECT  sum(total_harga) as pembelian "
                 + "from tbl_brgmsk "
-                + "WHERE tanggal = '" + date + "'";
-//        System.out.println(sql);
-String sql2 = "select total_harga as penjualan from tbl_transaksi where tanggal ='"+date+"'";
+                + "WHERE tanggal = '" + date + "' "
+                + "";
+        
+String sql2 = "select sum(total_harga) as penjualan from tbl_transaksi where tanggal ='"+date+"'"
+        + "";
         Connection c = (Connection) koneksi.getKoneksi();
         Statement s = c.createStatement();
         ResultSet a = s.executeQuery(sql1);
         
         Statement t = c.createStatement();
         ResultSet b = t.executeQuery(sql2);
+        System.out.println(sql1);
+        System.out.println(sql2);
         
         int penjualan = 0;
         int pembelian = 0;
+        int total = 0;
         
         if (a.next()) {
             pembelian = a.getInt("pembelian");
+            
         } 
         if(b.next()){
             penjualan = b.getInt("penjualan");
         }
-        int total = 0;
+        
         total = penjualan - pembelian;
         System.out.println("total : " + total);
+        
         return total;
         
     }
@@ -123,7 +130,7 @@ String sql2 = "select total_harga as penjualan from tbl_transaksi where tanggal 
                 cc.setTime(d);
                 String tgl = String.format("%d-%02d-%02d", cc.get(Calendar.YEAR), cc.get(Calendar.MONTH) + 1, cc.get(Calendar.DAY_OF_MONTH));
                 String hari = this.getNamaHari(cc.get(Calendar.DAY_OF_WEEK));
-//                System.out.println(tgl);
+                System.out.println(tgl);
 //                System.out.println(hari);
 //                System.out.println(cc.get(Calendar.DAY_OF_WEEK));
                 dataset.setValue(this.getData(tgl), "Amount", hari);
@@ -219,6 +226,7 @@ String sql2 = "select total_harga as penjualan from tbl_transaksi where tanggal 
         PENGELUARAN();
         PEMASUKAN();
         createDataset();
+        
 
     }
 

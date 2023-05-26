@@ -10,11 +10,13 @@ import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class pegawai extends javax.swing.JFrame {
 
     private void ID_PEGAWAI() {
-        List logBarang = new ArrayList();
+//        List logBarang = new ArrayList();
         String sql = "SELECT max(right(id_pegawai,4)) as id FROM tbl_pegawai ";
         //mengambil nilai id pegawai dari kanan 4 huruf/angka
         try {
@@ -341,9 +343,11 @@ public class pegawai extends javax.swing.JFrame {
                     pst.execute();
                     JOptionPane.showMessageDialog(null, "penyimpanan Berhasil");
                     clear();
-                } catch (Exception e) {
+                } catch (SQLException e) {
                     JOptionPane.showMessageDialog(this, "Periksa ID Pegawai dan Nomer Telepon!", "ERROR", JOptionPane.ERROR_MESSAGE);
-                }
+                } catch (ClassNotFoundException ex) {
+                Logger.getLogger(pegawai.class.getName()).log(Level.SEVERE, null, ex);
+            }
 //                }
             load_table();
             ID_PEGAWAI();
@@ -370,9 +374,11 @@ public class pegawai extends javax.swing.JFrame {
                         pst.execute();
                         JOptionPane.showMessageDialog(this, "Berhasil Menghapus Data");
                         clear();
-                    } catch (Exception e) {
+                    } catch (SQLException e) {
                         JOptionPane.showMessageDialog(this, "TIDAK DAPAT MENGHAPUS PEGAWAI");
-                    }
+                    } catch (ClassNotFoundException ex) {
+                Logger.getLogger(pegawai.class.getName()).log(Level.SEVERE, null, ex);
+            }
                     load_table();
                     ID_PEGAWAI();
                     btambah.setVisible(true);
@@ -414,8 +420,10 @@ public class pegawai extends javax.swing.JFrame {
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diedit");
                 clear();
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Perubahan data gagal" + e.getMessage());
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(pegawai.class.getName()).log(Level.SEVERE, null, ex);
             }
             load_table();
             btambah.setVisible(true);

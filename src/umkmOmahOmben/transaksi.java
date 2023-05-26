@@ -547,15 +547,20 @@ public class transaksi extends javax.swing.JFrame {
             }
         });
         tidmember.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tidmemberInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tidmember.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tidmemberActionPerformed(evt);
+            }
+        });
+        tidmember.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tidmemberKeyPressed(evt);
             }
         });
         getContentPane().add(tidmember, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 183, 190, 30));
@@ -1487,6 +1492,10 @@ evt.consume();
 evt.consume();
  }        // TODO add your handling code here:
     }//GEN-LAST:event_ttotalhargaKeyTyped
+
+    private void tidmemberKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tidmemberKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tidmemberKeyPressed
 
     /**
      * @param args the command line arguments

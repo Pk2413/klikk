@@ -1,0 +1,7 @@
+ownmer/admin :
+admin
+12345678
+
+karyawan 1 :
+pg
+pg
