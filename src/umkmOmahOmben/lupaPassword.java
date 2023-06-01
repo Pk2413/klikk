@@ -110,7 +110,7 @@ public class lupaPassword extends javax.swing.JFrame {
     }//GEN-LAST:event_tnotlpActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      if(tusername.getText().equals("") || tpassword.getText().equals("") || tnotlp.getText().equals("") || tpassword.getText().length() < 4){
+      if(tusername.getText().equals("") || tpassword.getText().equals("") || tnotlp.getText().equals("") || tpassword.getText().length() < 6){
           JOptionPane.showMessageDialog(null, "LENGKAPI DATA TERLEBIH DAHULU");
       }else{
         try {
@@ -128,7 +128,7 @@ public class lupaPassword extends javax.swing.JFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(lupaPassword.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
       }
     }//GEN-LAST:event_jButton1ActionPerformed

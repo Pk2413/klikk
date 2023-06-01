@@ -146,8 +146,8 @@ public class registrasi extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (tnama.getText().equals("") || talamat.getText().equals("") || tnotlp.getText().equals("") || tusername.getText().equals("")
-                || tpassword.getText().equals("") || tpassword.getText().length() < 6) {
+        if (tnama.getText().equals("") || talamat.getText().equals("") || tnotlp.getText().equals("") || tusername.getText().length() < 6
+                ||  tpassword.getText().length() < 6) {
             JOptionPane.showMessageDialog(this, "LENGKAPI DATA TERLEBIH DAHULU");
         } else {
 
@@ -170,6 +170,7 @@ public class registrasi extends javax.swing.JFrame {
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             } catch (ClassNotFoundException ex) {
+                
                 Logger.getLogger(registrasi.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -184,6 +185,9 @@ public class registrasi extends javax.swing.JFrame {
 
     private void tnotlpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tnotlpKeyTyped
 if(Character.isAlphabetic(evt.getKeyChar())){
+    evt.consume();
+}
+if(tnotlp.getText().length() > 15){
     evt.consume();
 }
     // TODO add your handling code here:

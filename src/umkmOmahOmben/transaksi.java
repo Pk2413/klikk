@@ -547,10 +547,10 @@ public class transaksi extends javax.swing.JFrame {
             }
         });
         tidmember.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tidmemberInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tidmember.addActionListener(new java.awt.event.ActionListener() {

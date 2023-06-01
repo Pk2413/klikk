@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -977,8 +979,10 @@ public class barangmasuk extends javax.swing.JFrame {
             }
             JOptionPane.showMessageDialog(null, "Penympanan berhasil!");
             hapusTabel();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         }
         DefaultTableModel model = (DefaultTableModel) tblhasil.getModel();
 
