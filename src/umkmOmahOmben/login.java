@@ -1,6 +1,7 @@
 package umkmOmahOmben;
 
 import java.awt.Color;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -10,6 +11,9 @@ import javax.swing.JOptionPane;
 import java.io.Writer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JPasswordField;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -23,7 +27,7 @@ public class login extends javax.swing.JFrame {
 
     public static String idPegawai;
     public static int level = 3;
-
+    
 //    private void setid() {
 //      
 //    }
@@ -69,12 +73,12 @@ public class login extends javax.swing.JFrame {
         tusername = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         lp = new javax.swing.JLabel();
+        showpass = new javax.swing.JCheckBox();
         tpassword = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
 
         pw.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         pw.setLocation(new java.awt.Point(400, 300));
-        pw.setPreferredSize(new java.awt.Dimension(388, 190));
         pw.setResizable(false);
         pw.setSize(new java.awt.Dimension(388, 190));
         pw.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -149,6 +153,14 @@ public class login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(lp, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 590, 120, 20));
+
+        showpass.setText("TAMPILKAN PASSWORD");
+        showpass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showpassActionPerformed(evt);
+            }
+        });
+        getContentPane().add(showpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 600, 180, -1));
 
         tpassword.setBackground(new java.awt.Color(241, 240, 236));
         tpassword.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -268,6 +280,14 @@ public class login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void showpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showpassActionPerformed
+        if(showpass.isSelected()){
+            tpassword.setEchoChar((char) 0);
+        }else{
+            tpassword.setEchoChar('*');
+        }
+    }//GEN-LAST:event_showpassActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -311,6 +331,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lp;
     private javax.swing.JFrame pw;
+    private javax.swing.JCheckBox showpass;
     private javax.swing.JTextField tpass;
     private javax.swing.JPasswordField tpassword;
     private javax.swing.JTextField tusername;

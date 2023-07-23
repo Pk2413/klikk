@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -66,6 +67,30 @@ public class registrasi extends javax.swing.JFrame {
         }
     }
 
+     private void load_table() {
+        //membuat tampilan
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Pegawai");
+        model.addColumn("Nama Pegawai");
+        model.addColumn("NO_Telp");
+        model.addColumn("Alamat");
+
+        //menampilkan data database kedalam tabel
+        try {
+            String sql = "SELECT * FROM tbl_pegawai";
+            Connection conn = (Connection) koneksi.getKoneksi();
+            java.sql.Statement st = conn.createStatement();
+            java.sql.ResultSet res = st.executeQuery(sql);
+            while (res.next()) {
+                model.addRow(new Object[]{res.getString(1), res.getString(2),
+                    res.getString(3), res.getString(4)});
+            }
+            tblhasil.setModel(model);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        tblhasil.setAutoResizeMode(10);
+    }
     /**
      * Creates new form registrasi
      */
@@ -73,6 +98,7 @@ public class registrasi extends javax.swing.JFrame {
         initComponents();
         ID_PEGAWAI();
 //        ID_PEGAWAI();
+load_table();
     }
 
     /**
@@ -91,6 +117,8 @@ public class registrasi extends javax.swing.JFrame {
         tusername = new javax.swing.JTextField();
         tnotlp = new javax.swing.JTextField();
         talamat = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblhasil = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -138,6 +166,23 @@ public class registrasi extends javax.swing.JFrame {
         talamat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         talamat.setBorder(null);
         getContentPane().add(talamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 240, 340, 40));
+
+        tblhasil.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tblhasil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblhasilMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblhasil);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/design5/register pegawai.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -193,6 +238,25 @@ if(tnotlp.getText().length() > 15){
     // TODO add your handling code here:
     }//GEN-LAST:event_tnotlpKeyTyped
 
+    private void tblhasilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblhasilMouseClicked
+        int baris = tblhasil.rowAtPoint(evt.getPoint());
+
+         idpegawai = tblhasil.getValueAt(baris, 0).toString();
+        
+
+        String nama = tblhasil.getValueAt(baris, 1).toString();
+        tnama.setText(nama);
+
+        String nohp = tblhasil.getValueAt(baris, 2).toString();
+        tnotlp.setText(nohp);
+
+        String alamat = tblhasil.getValueAt(baris, 3).toString();
+        talamat.setText(alamat);
+
+        
+        load_table();
+    }//GEN-LAST:event_tblhasilMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -232,7 +296,9 @@ if(tnotlp.getText().length() > 15){
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField talamat;
+    private javax.swing.JTable tblhasil;
     private javax.swing.JTextField tnama;
     private javax.swing.JTextField tnotlp;
     private javax.swing.JTextField tpassword;
