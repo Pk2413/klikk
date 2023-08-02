@@ -118,7 +118,7 @@ public class login extends javax.swing.JFrame {
         getContentPane().add(bregister, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 630, 170, 40));
 
         tusername.setBackground(new java.awt.Color(241, 240, 236));
-        tusername.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        tusername.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         tusername.setBorder(null);
         tusername.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

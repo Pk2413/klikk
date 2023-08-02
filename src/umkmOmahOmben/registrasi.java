@@ -34,7 +34,8 @@ public class registrasi extends javax.swing.JFrame {
         tnotlp.setText("");
         tusername.setText("");
         talamat.setText("");
-//        ID_PEGAWAI();
+        ID_PEGAWAI();
+        load_table();
     }
 
     private void ID_PEGAWAI() {
@@ -49,6 +50,7 @@ public class registrasi extends javax.swing.JFrame {
             while (rs.next()) {
                 if (rs.first() == false) {
                     idpegawai = "PG0001";
+                    tid.setText(idpegawai);
                 } else {
                     rs.last();
                     int autoid = rs.getInt("id");
@@ -60,6 +62,7 @@ public class registrasi extends javax.swing.JFrame {
                     }
                     idpegawai = ("PG" + nomor);
                     System.out.println(idpegawai);
+                    tid.setText(idpegawai);
                 }
             }
         } catch (Exception e) {
@@ -67,7 +70,7 @@ public class registrasi extends javax.swing.JFrame {
         }
     }
 
-     private void load_table() {
+    private void load_table() {
         //membuat tampilan
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID Pegawai");
@@ -91,6 +94,7 @@ public class registrasi extends javax.swing.JFrame {
         }
         tblhasil.setAutoResizeMode(10);
     }
+
     /**
      * Creates new form registrasi
      */
@@ -98,7 +102,7 @@ public class registrasi extends javax.swing.JFrame {
         initComponents();
         ID_PEGAWAI();
 //        ID_PEGAWAI();
-load_table();
+        load_table();
     }
 
     /**
@@ -111,6 +115,7 @@ load_table();
     private void initComponents() {
 
         tpassword = new javax.swing.JTextField();
+        tid = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         tnama = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
@@ -127,7 +132,11 @@ load_table();
 
         tpassword.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         tpassword.setBorder(null);
-        getContentPane().add(tpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 470, 340, 40));
+        getContentPane().add(tpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 520, 340, 40));
+
+        tid.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tid.setBorder(null);
+        getContentPane().add(tid, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 150, 340, 40));
 
         jButton1.setToolTipText("");
         jButton1.setContentAreaFilled(false);
@@ -140,7 +149,7 @@ load_table();
 
         tnama.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         tnama.setBorder(null);
-        getContentPane().add(tnama, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 170, 340, 40));
+        getContentPane().add(tnama, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 220, 340, 40));
 
         jButton2.setContentAreaFilled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -152,7 +161,7 @@ load_table();
 
         tusername.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         tusername.setBorder(null);
-        getContentPane().add(tusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 390, 340, 40));
+        getContentPane().add(tusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 440, 340, 40));
 
         tnotlp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         tnotlp.setBorder(null);
@@ -161,11 +170,11 @@ load_table();
                 tnotlpKeyTyped(evt);
             }
         });
-        getContentPane().add(tnotlp, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 320, 340, 40));
+        getContentPane().add(tnotlp, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 370, 340, 40));
 
         talamat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         talamat.setBorder(null);
-        getContentPane().add(talamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 240, 340, 40));
+        getContentPane().add(talamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 290, 340, 40));
 
         tblhasil.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -182,7 +191,7 @@ load_table();
         });
         jScrollPane1.setViewportView(tblhasil);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 520, 460));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/design5/register pegawai.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -191,31 +200,48 @@ load_table();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (tnama.getText().equals("") || talamat.getText().equals("") || tnotlp.getText().equals("") || tusername.getText().length() < 6
-                ||  tpassword.getText().length() < 6) {
+        if (tnama.getText().equals("") || talamat.getText().equals("") || tnotlp.getText().equals("")
+                || tusername.getText().equals("") || tpassword.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "LENGKAPI DATA TERLEBIH DAHULU");
+        } else if (tpassword.getText().length() < 6) {
+            JOptionPane.showMessageDialog(null, "isi username harus lebih dari 5");
+        } else if (tusername.getText().length() < 6) {
+            JOptionPane.showMessageDialog(null, "password harus diisi lebih dari 5");
         } else {
 
             try {
+                String id = "select id_pegawai from tbl_pegawai where id_pegawai='" + tid.getText() + "'";
+                java.sql.Connection con = (Connection) koneksi.getKoneksi();
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(id);
 
                 String lvl = String.valueOf(level);
-                String sql = "INSERT INTO tbl_pegawai VALUES ('" + idpegawai + "','"
-                        + tnama.getText() + "','" + tnotlp.getText() + "','" + talamat.getText() + "')";
-                String sql1 = "insert into `tbl_akun` VALUES ('" + idpegawai + "','" + tnama.getText() + "','" + tpassword.getText() + "','" + lvl + "')";
+                System.out.println(tid.getText());
+                if (rs.next()) {
+                    System.out.println("1");
+                    String sql1 = "insert into `tbl_akun` VALUES ('" + idpegawai + "','"+tusername.getText()+
+                            "','" + tpassword.getText() + "','" + lvl + "')";
+                    System.out.println(sql1);
+                    PreparedStatement pst = con.prepareStatement(sql1);
+                    pst.execute();
 
-                java.sql.Connection con = (Connection) koneksi.getKoneksi();
-                PreparedStatement pst = con.prepareStatement(sql);
-                pst.execute();
-
-                PreparedStatement ps = con.prepareStatement(sql1);
-                ps.execute();
+                } else {System.out.println("2");
+                    String sql = "INSERT INTO tbl_pegawai VALUES ('" + idpegawai + "','"
+                            + tnama.getText() + "','" + tnotlp.getText() + "','" + talamat.getText() + "')";
+                    String sql1 = "insert into `tbl_akun` VALUES ('" + idpegawai + "','"+tusername.getText()+
+                            "','" + tpassword.getText() + "','" + lvl + "')";
+                    PreparedStatement pst = con.prepareStatement(sql);
+                    pst.execute();
+                    PreparedStatement ps = con.prepareStatement(sql1);
+                    ps.execute();
+                }
 
                 JOptionPane.showMessageDialog(null, "Penympanan berhasil!");
 
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             } catch (ClassNotFoundException ex) {
-                
+
                 Logger.getLogger(registrasi.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -229,20 +255,20 @@ load_table();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tnotlpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tnotlpKeyTyped
-if(Character.isAlphabetic(evt.getKeyChar())){
-    evt.consume();
-}
-if(tnotlp.getText().length() > 15){
-    evt.consume();
-}
-    // TODO add your handling code here:
+        if (Character.isAlphabetic(evt.getKeyChar())) {
+            evt.consume();
+        }
+        if (tnotlp.getText().length() > 15) {
+            evt.consume();
+        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_tnotlpKeyTyped
 
     private void tblhasilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblhasilMouseClicked
         int baris = tblhasil.rowAtPoint(evt.getPoint());
 
-         idpegawai = tblhasil.getValueAt(baris, 0).toString();
-        
+        idpegawai = tblhasil.getValueAt(baris, 0).toString();
+        tid.setText(idpegawai);
 
         String nama = tblhasil.getValueAt(baris, 1).toString();
         tnama.setText(nama);
@@ -253,7 +279,6 @@ if(tnotlp.getText().length() > 15){
         String alamat = tblhasil.getValueAt(baris, 3).toString();
         talamat.setText(alamat);
 
-        
         load_table();
     }//GEN-LAST:event_tblhasilMouseClicked
 
@@ -299,6 +324,7 @@ if(tnotlp.getText().length() > 15){
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField talamat;
     private javax.swing.JTable tblhasil;
+    private javax.swing.JTextField tid;
     private javax.swing.JTextField tnama;
     private javax.swing.JTextField tnotlp;
     private javax.swing.JTextField tpassword;
